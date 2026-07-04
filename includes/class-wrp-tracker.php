@@ -90,6 +90,17 @@ class WRP_Tracker {
     }
 
     /**
+     * Computes commission amount from order total and rate.
+     *
+     * @param float $order_total     Order grand total.
+     * @param float $commission_rate Percentage rate (e.g. 10 for 10%).
+     * @return float Commission amount, rounded to 4 decimal places.
+     */
+    public static function calculate_commission( float $order_total, float $commission_rate ): float {
+        return round( $order_total * ( $commission_rate / 100 ), 4 );
+    }
+
+    /**
      * Fires when an order transitions to "processing" status.
      * Records a commission if the order contains a referral coupon.
      */
@@ -112,7 +123,7 @@ class WRP_Tracker {
 
             $order_total       = (float) $order->get_total();
             $commission_rate   = (float) $referrer->commission_rate;
-            $commission_amount = round( $order_total * ( $commission_rate / 100 ), 4 );
+            $commission_amount = self::calculate_commission( $order_total, $commission_rate );
 
             $inserted = WRP_Database::record_commission(
                 (int) $referrer->id,
