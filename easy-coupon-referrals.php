@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: WC Referral Program
+ * Plugin Name: Easy Coupon Referrals
  * Plugin URI:  https://hozt.com/woocommerce
  * Description: Referral tracking with coupon-based attribution and commission management.
  * Version:     1.0.0
  * Author:      Jeffrey Haug
- * Text Domain: wc-referral-program
+ * Text Domain: easy-coupon-referrals
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * WC requires at least: 7.0
@@ -94,6 +94,6 @@ class WRP_Plugin {
     }
 
     public static function wc_missing_notice() {
-        echo '<div class="notice notice-error"><p><strong>WC Referral Program</strong> requires WooCommerce to be installed and active.</p></div>';
+        echo '<div class="notice notice-error"><p><strong>Easy Coupon Referrals</strong> requires WooCommerce to be installed and active.</p></div>';
     }
 }

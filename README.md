@@ -1,4 +1,4 @@
-# WC Referral Program
+# Easy Coupon Referrals
 
 Coupon-based referral tracking for WooCommerce with commission management and a referrer dashboard.
 

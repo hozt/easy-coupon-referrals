@@ -16,7 +16,7 @@ jobs:
       - name: Build zip
         run: |
           VERSION="${{ github.event.release.tag_name }}"
-          PLUGIN_SLUG="wc-referral-program"
+          PLUGIN_SLUG="easy-coupon-referrals"
           ZIP_NAME="${PLUGIN_SLUG}-${VERSION}.zip"
 
           # Create a clean staging directory matching the plugin folder name WP expects
