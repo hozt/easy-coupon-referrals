@@ -1,0 +1,177 @@
+/* WC Referral Program — Frontend Dashboard Styles */
+
+.wrp-dashboard {
+    font-family: inherit;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+}
+
+.wrp-dashboard-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.wrp-dashboard-welcome {
+    color: #555;
+    margin-bottom: 28px;
+    font-size: 15px;
+}
+
+/* ── Summary Cards ──────────────────────────────────── */
+
+.wrp-summary-cards {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+.wrp-card {
+    flex: 1;
+    min-width: 160px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.wrp-card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.wrp-card-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1d2327;
+}
+
+.wrp-card-pending { border-top: 3px solid #dba617; }
+.wrp-card-pending .wrp-card-value { color: #8a6900; }
+
+.wrp-card-paid { border-top: 3px solid #00a32a; }
+.wrp-card-paid .wrp-card-value { color: #00a32a; }
+
+/* ── Section titles ─────────────────────────────────── */
+
+.wrp-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+/* ── Tables ─────────────────────────────────────────── */
+
+.wrp-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.wrp-table thead th {
+    background: #f8f8f8;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #555;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.wrp-table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.wrp-table tbody tr:last-child td { border-bottom: none; }
+
+.wrp-table tbody tr:hover { background: #fafafa; }
+
+.wrp-row-paid { opacity: .85; }
+
+/* ── Coupon code style ──────────────────────────────── */
+
+.wrp-code {
+    background: #f0f0f1;
+    border-radius: 3px;
+    padding: 2px 7px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    font-family: monospace;
+}
+
+.wrp-link-text {
+    font-size: 13px;
+    color: #555;
+    word-break: break-all;
+}
+
+/* ── Copy button ────────────────────────────────────── */
+
+.wrp-copy-btn {
+    background: #2271b1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.wrp-copy-btn:hover { background: #135e96; }
+.wrp-copy-btn:active { background: #0d4473; }
+
+/* ── Status badges ──────────────────────────────────── */
+
+.wrp-status-paid {
+    color: #00a32a;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.wrp-status-pending {
+    color: #8a6900;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* ── Utility ────────────────────────────────────────── */
+
+.wrp-muted { color: #888; }
+
+.wrp-not-registered {
+    background: #fff3cd;
+    border: 1px solid #dba617;
+    border-radius: 6px;
+    padding: 14px 18px;
+    color: #664d03;
+}
+
+.wrp-login-gate {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px 32px;
+}
+
+.wrp-login-gate p {
+    margin-bottom: 16px;
+    color: #555;
+}

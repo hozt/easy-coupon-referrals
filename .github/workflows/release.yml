@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  zip:
+    name: Build & attach zip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build zip
+        run: |
+          VERSION="${{ github.event.release.tag_name }}"
+          PLUGIN_SLUG="wc-referral-program"
+          ZIP_NAME="${PLUGIN_SLUG}-${VERSION}.zip"
+
+          # Create a clean staging directory matching the plugin folder name WP expects
+          mkdir -p "dist/${PLUGIN_SLUG}"
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='dist' \
+            . "dist/${PLUGIN_SLUG}/"
+
+          cd dist
+          zip -r "../${ZIP_NAME}" "${PLUGIN_SLUG}/"
+          cd ..
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+
+      - name: Upload zip to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
