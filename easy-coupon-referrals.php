@@ -3,7 +3,7 @@
  * Plugin Name: Easy Coupon Referrals
  * Plugin URI:  https://hozt.com/woocommerce
  * Description: Referral tracking with coupon-based attribution and commission management.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Jeffrey Haug
  * Text Domain: easy-coupon-referrals
  * Requires at least: 6.0
@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WRP_VERSION',     '1.0.0' );
+define( 'WRP_VERSION',     '1.1.0' );
 define( 'WRP_PLUGIN_FILE', __FILE__ );
 define( 'WRP_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'WRP_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
