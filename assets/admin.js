@@ -363,18 +363,10 @@ jQuery( function ( $ ) {
     }
 
     function copyToClipboard( text, $btn, defaultLabel, copiedLabel ) {
-        if ( navigator.clipboard && navigator.clipboard.writeText ) {
-            navigator.clipboard.writeText( text ).then( function () {
-                $btn.text( copiedLabel );
-                setTimeout( function () { $btn.text( defaultLabel ); }, 2000 );
-            } );
-        } else {
-            var $tmp = $( '<input>' ).val( text ).appendTo( 'body' ).select();
-            document.execCommand( 'copy' );
-            $tmp.remove();
+        navigator.clipboard.writeText( text ).then( function () {
             $btn.text( copiedLabel );
             setTimeout( function () { $btn.text( defaultLabel ); }, 2000 );
-        }
+        } );
     }
 
 } );
