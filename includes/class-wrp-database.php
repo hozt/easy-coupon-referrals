@@ -290,12 +290,13 @@ class WRP_Database {
         global $wpdb;
         if ( empty( $commission_ids ) ) return 0;
 
-        $table = $wpdb->prefix . self::TABLE_COMMISSIONS;
-        $ids   = implode( ',', array_map( 'intval', $commission_ids ) );
+        $table        = $wpdb->prefix . self::TABLE_COMMISSIONS;
+        $ids          = array_map( 'intval', $commission_ids );
+        $placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
         return (int) $wpdb->query(
             $wpdb->prepare(
-                "UPDATE {$table} SET status = 'paid', paid_at = %s WHERE id IN ({$ids}) AND status = 'pending'",
-                current_time( 'mysql' )
+                "UPDATE {$table} SET status = 'paid', paid_at = %s WHERE id IN ({$placeholders}) AND status = 'pending'",
+                array_merge( [ current_time( 'mysql' ) ], $ids )
             )
         );
     }

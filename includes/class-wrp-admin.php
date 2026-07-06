@@ -220,7 +220,7 @@ class WRP_Admin {
                     <tr>
                         <th><label for="wrp-notes">Notes</label></th>
                         <td>
-                            <textarea id="wrp-notes" rows="2" class="large-text" placeholder="Optional internal notes…"></textarea>
+                            <textarea id="wrp-notes" rows="2" class="large-text" maxlength="500" placeholder="Optional internal notes…"></textarea>
                         </td>
                     </tr>
                 </table>
@@ -554,7 +554,7 @@ class WRP_Admin {
         $referrer_id          = isset( $_POST['referrer_id'] ) && '' !== $_POST['referrer_id'] ? absint( $_POST['referrer_id'] ) : null;
         $user_id              = absint( $_POST['user_id'] ?? 0 );
         $commission_rate      = min( 100.0, max( 0.0, (float) ( $_POST['commission_rate'] ?? 0 ) ) );
-        $notes                = sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) );
+        $notes                = substr( sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) ), 0, 500 );
         $coupon_codes         = json_decode( wp_unslash( $_POST['coupon_codes_json'] ?? '[]' ), true );
         $coupon_codes         = is_array( $coupon_codes ) ? array_map( 'sanitize_text_field', $coupon_codes ) : [];
         $coupon_discount_type = sanitize_text_field( wp_unslash( $_POST['coupon_discount_type'] ?? 'percent' ) );
@@ -787,8 +787,13 @@ class WRP_Admin {
 
         // Threshold check — group selected IDs by referrer and validate each
         global $wpdb;
-        $id_list      = implode( ',', $ids );
-        $rows         = $wpdb->get_results( "SELECT id, referrer_id FROM {$wpdb->prefix}" . WRP_Database::TABLE_COMMISSIONS . " WHERE id IN ({$id_list})" );
+        $placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+        $rows         = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT id, referrer_id FROM {$wpdb->prefix}" . WRP_Database::TABLE_COMMISSIONS . " WHERE id IN ({$placeholders})",
+                $ids
+            )
+        );
         $by_referrer  = [];
         foreach ( $rows as $row ) {
             $by_referrer[ (int) $row->referrer_id ][] = (int) $row->id;
@@ -837,9 +842,14 @@ class WRP_Admin {
         global $wpdb;
         if ( empty( $ids ) ) return;
 
-        $table     = $wpdb->prefix . WRP_Database::TABLE_COMMISSIONS;
-        $id_list   = implode( ',', array_map( 'intval', $ids ) );
-        $order_ids = $wpdb->get_col( "SELECT order_id FROM {$table} WHERE id IN ({$id_list})" );
+        $table        = $wpdb->prefix . WRP_Database::TABLE_COMMISSIONS;
+        $placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+        $order_ids    = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT order_id FROM {$table} WHERE id IN ({$placeholders})",
+                array_map( 'intval', $ids )
+            )
+        );
 
         foreach ( $order_ids as $order_id ) {
             $order = wc_get_order( (int) $order_id );
